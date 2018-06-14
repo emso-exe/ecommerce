@@ -125,7 +125,7 @@ class User extends Model {
 
  		$sql->query("CALL sp_users_delete(:iduser)", array(
 			":iduser"=>$this->getiduser()
- 		));
+ 		));       
  	}  
 
 public static function getForgot($email, $inadmin = true)
