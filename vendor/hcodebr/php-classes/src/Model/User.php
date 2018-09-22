@@ -12,6 +12,7 @@ class User extends Model {
 	const SECRET = "HcodePhp7_Secret";
     const ERROR = "UserError";
     const ERROR_REGISTER = "UserErrorRegister";    
+    const SUCCESS = "UserSuccess";    
 
     public static function getFromSession() {
         
