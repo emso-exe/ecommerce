@@ -304,10 +304,13 @@ public static function getForgot($email, $inadmin = true)
     }
 
     public static function checkLoginExist($login) {
+
         $sql = new Sql();
+
         $results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :deslogin", [
             ':deslogin'=>$login
         ]);
+
         return (count($results) > 0);
     }
 
@@ -316,6 +319,26 @@ public static function getForgot($email, $inadmin = true)
             "cost"=>12
         ]);
     }
+
+    public function getOrders() {
+
+        $sql = new Sql();
+
+        $results = $sql->select("
+            SELECT * 
+            FROM tb_orders a 
+            INNER JOIN tb_ordersstatus b USING(idstatus) 
+            INNER JOIN tb_carts c USING(idcart)
+            INNER JOIN tb_users d ON d.iduser = a.iduser
+            INNER JOIN tb_addresses e USING(idaddress)
+            INNER JOIN tb_persons f ON f.idperson = d.idperson
+            WHERE a.iduser = :iduser
+        ", [
+            ':iduser'=>$this->getiduser()
+        ]);
+        
+        return $results;
+    }    
 
 }
 
